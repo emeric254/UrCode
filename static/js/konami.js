@@ -22,6 +22,7 @@ var isKonamiActivated = false;
 
 var canvas;
 var context2D;
+var player;
 
 //@TODO Resolve the problem of infinite particles array
 
@@ -48,7 +49,7 @@ $(document).keydown(function (e)
 
 
 /*
-This is the function called when the konami code is done 
+This is the function called when the konami code is done
 */
 function konami()
 {
@@ -67,28 +68,28 @@ function konami()
 		canvas.style.top = "0px";
 		canvas.style.left = "0px";
 		canvas.style.zIndex = "1000";
-		
+
 		window.addEventListener("resize", function()
             {
                 canvas.width = document.body.clientWidth; //document.width is obsolete
                 canvas.height = document.body.clientHeight; //document.height is obsolete
             });
-		
+
 		context2D = canvas.getContext("2d");
-		
-		xwing = new XWing();
-		
+
+		player = new XWing();
+
 		document.addEventListener("click", function(evt)
             {
-                xwing.fire();
+                player.fire();
             });
-		
+
 		document.addEventListener("mousemove", function(evt)
             {
-                xwing.mouseX = evt.clientX - (document.body.clientWidth / 2);
-                xwing.mouseY = evt.clientY - (document.body.clientHeight / 2);
+                player.mouseX = evt.clientX - (document.body.clientWidth / 2);
+                player.mouseY = evt.clientY - (document.body.clientHeight / 2);
             });
-		
+
 		var music = document.createElement("audio");
 		music.src = scriptSrc + "/starwars.mp3";
 		music.play();
@@ -97,7 +98,7 @@ function konami()
                 this.currentTime = 0;
                 this.play();
             }, false);
-		
+
 		setInterval(function()
             {
                 update(frameDelay);
@@ -111,11 +112,11 @@ XWing constructor
 function XWing()
 {
 	// The cursor is where the XWing will fire
-	this.cursorX = 0, this.cursorY = 0;
+	this.cursorX = 0; this.cursorY = 0;
 	this.cursorCoef = 5; // If it is high, the cursor will be slower
 	this.cursorRadius = 15; // Size of the cursor
 	this.cursorColor = "#00FF00"; // Green
-	this.mouseX = 0, this.mouseY = 0; // Real mouse position
+	this.mouseX = 0; this.mouseY = 0; // Real mouse position
 	this.scale = 0.5; // Scale of the XWing compared to the source image
 	this.img = document.createElement("img");
 	this.img.src = scriptSrc + "/xwing.png";
@@ -180,28 +181,28 @@ function XWing()
 		this.sound.play();
 		this.soundTimeout = setTimeout(function ()
             {
-                    xwing.sound.pause();
-                    xwing.sound.currentTime = 0;
+                    player.sound.pause();
+                    player.sound.currentTime = 0;
             }, 500);
 	}
 	
 	this.fire = function ()
 	{
 		/*
-		var x = document.body.clientWidth / 2 + xwing.cursorX;
-		var y = document.body.clientHeight / 2 + xwing.cursorY;
+		var x = document.body.clientWidth / 2 + player.cursorX;
+		var y = document.body.clientHeight / 2 + player.cursorY;
 
 		createExplosion(x, y, "#525252");
 		createExplosion(x, y, "#FFA318");
 		*/
-		xwing.playSound();
+		player.playSound();
 		if ( this.cursorX <= this.ennemyX + this.ennemyRadius
 		    && this.cursorX >= this.ennemyX - this.ennemyRadius
 		    && this.cursorY <= this.ennemyY + this.ennemyRadius
 		    && this.cursorY >= this.ennemyY - this.ennemyRadius )
 		{
-			xwing.score++;
-			xwing.newEnnemy();
+			player.score++;
+			player.newEnnemy();
 		}
 	}
 	
@@ -356,6 +357,6 @@ function update (frameDelay)
 		particle.draw(context2D);
 	}
 	*/
-	xwing.draw(context2D);
-	xwing.moveCursor();
+	player.draw(context2D);
+	player.moveCursor();
 }

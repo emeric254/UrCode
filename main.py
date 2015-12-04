@@ -18,6 +18,7 @@ __title__ = "Nuit de l'info 2015 - Binouse"
 # var : directory name where the server will load in "pages" and "rsc"
 filePath = "static/"
 
+bd = bdd.gestionnaire()
 
 # Handler for api
 class APIHandler(tornado.web.RequestHandler):
@@ -29,7 +30,7 @@ class APIHandler(tornado.web.RequestHandler):
             self.write(str(time.time()))
         elif path_request == "test":
             jsonVar = {"records": []}
-            catas = bdd.getCata()
+            catas = bd.getCata()
             for cata in catas:
                 jsonVar["records"].append({"id": cata[0], "Name": cata[1], "Status": "", "DerniereActu": {"Date": "01234567890", "Description": "blablabla"}})
             self.write(json.dumps(jsonVar))
@@ -59,7 +60,7 @@ class MainHandler(tornado.web.RequestHandler):
 
 def main():
 
-    if os.path.isfile("example.db"):
+    if os.path.isfile(bdd.nomBDD):
         bdd.suprTables()
     bdd.creaTables()
     bdd.creaTuples()

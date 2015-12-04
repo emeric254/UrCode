@@ -13,7 +13,7 @@
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-	bargin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .event-box-content header
@@ -52,7 +52,7 @@
 {
 	font-style: italic;
 	color: #999;
-	margin-top: 0px;
+	margin-top: 0;
 	margin-right: 20px;
 }
 
@@ -88,7 +88,7 @@
 	flex-direction: column;
 }
 
-.new_user_form [type="submit"]
+.new_user_form [type=submit]
 {
 	width: 100px;
 }
@@ -106,7 +106,7 @@
 {
 	border-top: 1px solid #DDD;
 	position: absolute;
-	bottom: 0px;
+	bottom: 0;
 	padding: 10px;
 	margin: 0;
 	color: #333;
