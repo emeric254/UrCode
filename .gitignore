@@ -4,6 +4,7 @@
 .project/*
 *.class
 .class/*
+.idea/*
 .classpath/*
 *.classpath
 *.settings
