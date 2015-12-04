@@ -76,27 +76,13 @@
 	justify-content : space-between;
 }
 
-.new_user_page img
-{
-	width: 300px;
-	height: 300px;
-}
-
 .form
 {
 	display: flex;
 	flex-direction: column;
-}
-
-.new_user_form [type=submit]
-{
-	width: 100px;
-}
-
-.new_event
-{
 	margin: auto;
 }
+
 
 /* ----------------------------------------------*/
 /* FOOTER */
